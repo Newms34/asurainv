@@ -25,7 +25,7 @@
             </div>
             Input Word (acronym):
             <input id='acro' type='text' ng-model='inWrd' ng-change='clearAndRun()'>
-            <button class='btn btn-info' ng-click='checkHeldRun()' ng-show='inWrd'>&#10227; Re-roll!</button>
+            <button class='btn btn-info' id='roll-butt' ng-click='checkHeldRun()' ng-show='inWrd'><div id='spinny'>&#10227;</div> Re-roll!</button>
             <hr/>
             <div id='inv' ng-class="{'filled-ac':inWrd}">
                 <h4>Result</h4> {{inv}}
