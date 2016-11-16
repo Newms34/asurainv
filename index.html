@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Asuran Invention Creator</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+
+<body ng-app='asurapp' ng-controller='asurcon'>
+    <div class='panel panel-primary col-md-5 col-md-offset-3'>
+        <div class='panel-heading'>
+            <h2>Get an Asuran invention!</h2>
+        </div>
+        <div class='panel-body'>
+            <div class='alert-info' ng-click='inst=!inst'>
+                <h4>Instructions (click to show/hide):</h4>
+                <ul ng-show='inst'>
+                    <li>Type a word in the box!</li>
+                    <li>See Asuran invention!</li>
+                    <li>Click magnifying glass button to get the definition of the word. This works like... 25% of the time. Sorry.</li>
+                    <li>Click the re-roll button to get another combo.</li>.
+                    <li>Click the &#9746;checkbox next to the word in the table to 'fix' that word. Doing this will prevent it from changing when you click re-roll! Note that locking one word will also lock the 'types' of all other words.</li>
+                </ul>
+            </div>
+            Input Word (acronym):
+            <input id='acro' type='text' ng-model='inWrd' ng-change='clearAndRun()'>
+            <button class='btn btn-info' ng-click='checkHeldRun()' ng-show='inWrd'>&#10227; Re-roll!</button>
+            <hr/>
+            <div id='inv' ng-class="{'filled-ac':inWrd}">
+                <h4>Result</h4> {{inv}}
+                <hr>
+                <table class='table' ng-show='inWrd'>
+                    <thead>
+                        <div ng-show='inWrd'><i>Important note: Not all words have valid wiktionary.org links!</i></div>
+                        <tr>
+                            <th>#</th>
+                            <th>Word</th>
+                            <th>&#128274;Lock Word</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat='res in results | orderBy: $index' ng-class="{'alert-danger':res.held}">
+                            <td>{{$index+1}}</td>
+                            <td>
+                                <button class='btn btn-info' ng-click='refWrd(res)'>&#128269;{{res.wrd}}</button>
+                            </td>
+                            <td><input type="checkbox" ng-model="res.held"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id='iconcont'>
+                <div class='icon-part' id='icon-top-bg'>
+                    <div class='icon-part' id='icon-top'>
+                    </div>
+                </div>
+                <div class='icon-part' id='icon-bot-bg'>
+                    <div class='icon-part' id='icon-bot'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
