@@ -43,7 +43,7 @@
                         <tr ng-repeat='res in results | orderBy: $index' ng-class="{'alert-danger':res.held}">
                             <td>{{$index+1}}</td>
                             <td>
-                                <button class='btn btn-info' ng-click='refWrd(res)'>&#128269;{{res.wrd}}</button>
+                                <button class='btn btn-info' ng-click='refWrd(res.wrd)'>&#128269;{{res.wrd}}</button>
                             </td>
                             <td><input type="checkbox" ng-model="res.held"></td>
                         </tr>
