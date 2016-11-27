@@ -123,6 +123,11 @@ body{
     background: linear-gradient(175deg, rgba(124, 43, 255, .4) 0%, rgba(198, 163, 255, .4) 100%);
 }
 
+#letter{
+    background:#fed;
+    padding:10px;
+}
+
 @keyframes spin {
     from {
         transform:rotateZ(0deg);

@@ -8,9 +8,9 @@
 </head>
 
 <body ng-app='asurapp' ng-controller='asurcon'>
-    <div class='panel panel-primary col-md-5 col-md-offset-3'>
+    <div class='panel panel-primary col-md-5 col-md-offset-3' ng-show='!letter'>
         <div class='panel-heading'>
-            <h2>Get an Asuran invention!</h2>
+            <h2>Get an Asuran Invention! <button class='btn btn-info' title='switch modules' ng-click='letter=!letter'>&#8644;</button></h2>
         </div>
         <div class='panel-body'>
             <div class='alert-info' ng-click='inst=!inst'>
@@ -25,7 +25,8 @@
             </div>
             Input Word (acronym):
             <input id='acro' type='text' ng-model='inWrd' ng-change='clearAndRun()'>
-            <button class='btn btn-info' id='roll-butt' ng-click='checkHeldRun()' ng-show='inWrd'><div id='spinny'>&#10227;</div> Re-roll!</button>
+            <button class='btn btn-info' id='roll-butt' ng-click='checkHeldRun()' ng-show='inWrd'>
+                <div id='spinny'>&#10227;</div> Re-roll!</button>
             <hr/>
             <div id='inv' ng-class="{'filled-ac':inWrd}">
                 <h4>Result</h4> {{inv}}
@@ -45,7 +46,9 @@
                             <td>
                                 <button class='btn btn-info' ng-click='refWrd(res.wrd)'>&#128269;{{res.wrd}}</button>
                             </td>
-                            <td><input type="checkbox" ng-model="res.held"></td>
+                            <td>
+                                <input type="checkbox" ng-model="res.held">
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -60,16 +63,31 @@
                     </div>
                 </div>
             </div>
-            <div id='creds' class='alert-info' ng-click='showCreds=!showCreds'><h5>Credits (click to toggle)</h5><ul ng-show='showCreds'>
-                <li>All credit goes to ArenaNet™ for their awesome game</li>
-                <li>A lot of the words are from <a href='http://eng.ussmatrix.org/generator.html'>this site</a>. However, I've edited the list down a bit and removed grammatically innappropriate words as well as words that otherwise didn't seem to fit.</li>
-                <li>While the background image itself is from ArenaNet™, I obtained it from <a href='https://endalia.wordpress.com/2012/08/30/guild-wars-2-rata-sum-vistas/'>this site</a></li>
-            </ul></div>
+            <div id='creds' class='alert-info' ng-click='showCreds=!showCreds'>
+                <h5>Credits (click to toggle)</h5>
+                <ul ng-show='showCreds'>
+                    <li>All credit goes to ArenaNet™ for their awesome game</li>
+                    <li>A lot of the words are from <a href='http://eng.ussmatrix.org/generator.html'>this site</a>. However, I've edited the list down a bit and removed grammatically innappropriate words as well as words that otherwise didn't seem to fit.</li>
+                    <li>While the background image itself is from ArenaNet™, I obtained it from <a href='https://endalia.wordpress.com/2012/08/30/guild-wars-2-rata-sum-vistas/'>this site</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class='panel panel-primary col-md-5 col-md-offset-3' ng-show='letter'>
+        <div class='panel-heading'>
+            <h2>Get an Asura Letter! <button class='btn btn-info' title='switch modules' ng-click='letter=!letter'>&#8644;</button></h2>
+        </div>
+        <div class='panel-body'>
+            <div id='letter'>
+                <button ng-click='writeLetter()' class='btn btn-primary'>&#128395;Write a letter</button>
+                <div ng-bind-html='theLet'></div>
+            </div>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.min.js"></script>
     <script src="./js/main.js"></script>
 </body>
 
