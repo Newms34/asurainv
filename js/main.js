@@ -7,7 +7,7 @@ var asura = {
 var app = angular.module('asurapp', ['ngSanitize']).controller('asurcon', function($scope) {
     if (!localStorage.asuraLetterAlert) {
         bootbox.alert('<div id="bigbang">!</div> Important warning:<br/>The Asuran Letter Writer generates random Asura names. As these names are generated from a very simple formula, they are <i>not filtered</i>. As such, you may encounter names like "Councilor Butt", or worse. Just so you know!')
-            // localStorage.asuraLetterAlert = true;
+            localStorage.asuraLetterAlert = true;
     }
     $scope.words = {
         //note the adverbs arent actually adverbs!
