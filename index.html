@@ -21,6 +21,7 @@
                     <li>Click magnifying glass button to get the definition of the word. This works like... 25% of the time. Sorry.</li>
                     <li>Click the re-roll button to get another combo.</li>.
                     <li>Click the &#9746;checkbox next to the word in the table to 'fix' that word. Doing this will prevent it from changing when you click re-roll! Note that locking one word will also lock the 'types' of all other words.</li>
+                    <li> Click the <span class='btn btn-info no-clik'>&#8644;</span> to switch to Letter Writing mode.</li>
                 </ul>
             </div>
             Input Word (acronym):
@@ -78,14 +79,23 @@
             <h2>Get an Asura Letter! <button class='btn btn-info' title='switch modules' ng-click='letter=!letter'>&#8644;</button></h2>
         </div>
         <div class='panel-body'>
+            <div class='alert-info' ng-click='letInst=!letInst'>
+                <h4>Instructions (click to show/hide):</h4>
+                <ul ng-show='letInst'>
+                    <li>Click <span class='btn btn-primary no-clik'>&#128395;Get a letter</span> to see if the Arcane Council approves your project proposal!</li>
+                    <li>If the Input Word box (from the invention generator) is blank, a random 'word' will be used instead.</li>
+                    <li> Click the <span class='btn btn-info no-clik'>&#8644;</span> to switch to Acronym Maker mode.</li>
+                </ul>
+            </div>
             <div id='letter'>
-                <button ng-click='writeLetter()' class='btn btn-primary'>&#128395;Write a letter</button>
+                <button ng-click='writeLetter()' class='btn btn-primary'>&#128395;Get a letter</button>
                 <div ng-bind-html='theLet'></div>
             </div>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./js/bootbox.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.min.js"></script>
     <script src="./js/main.js"></script>

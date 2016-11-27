@@ -5,6 +5,10 @@ var asura = {
     titles: ['Explorer', 'Technologist', 'Aetheromancer', 'Warmaster', 'Steward', 'Agent', 'Analyst', 'Apprentice', 'Researcher', 'Gustomancer', 'Assistant', 'Crusader', 'Councilor', 'Magister', 'Organizer']
 }
 var app = angular.module('asurapp', ['ngSanitize']).controller('asurcon', function($scope) {
+    if (!localStorage.asuraLetterAlert) {
+        bootbox.alert('<div id="bigbang">!</div> Important warning:<br/>The Asuran Letter Writer generates random Asura names. As these names are generated from a very simple formula, they are <i>not filtered</i>. As such, you may encounter names like "Councilor Butt", or worse. Just so you know!')
+            // localStorage.asuraLetterAlert = true;
+    }
     $scope.words = {
         //note the adverbs arent actually adverbs!
         adv: ["anti", "bi", "deci", "di", "exo", "ferro", "hepto", "hexo", "mono", "omni", "para", "poly", "post", "pre", "pro", "in", "quasi", "octo", "nono", "deci", "deca", "uni", "hetero", "homo", "hyper", "hypo", "gymno", "quatro", "sesqui", "semi", "tetra", "trans", "tri"],
@@ -14,7 +18,7 @@ var app = angular.module('asurapp', ['ngSanitize']).controller('asurcon', functi
         },
         noun: ["accelerator", "acid", "algorithm", "amplifier", "analysis", "analyzer", "android", "antenna", "apparatus", "armament", "armor", "automation", "biont", "catalyst", "catalyzer", "converter", "deflector", "device", "diffraction", "diffractor", "discriminator", "display", "disruptor", "drill", "driver", "element", "emulator", "engine", "enhancer", "facilitator", "factioner", "field", "force", "generator", "golem", "harmonics", "impulse", "inducer", "infuser", "inhibitor", "injector", "instrument", "instrumentation", "intercom", "interlock", "inversion", "inverter", "isolator", "jig", "jargonaut", "jingoist", "jazzophone", "justiciar", "kainotophobe", "kakorrhaphiophobe", "kinetoscope", "kinescope", "kinetics", "laser", "latch", "lift", "light", "line", "liquid", "load", "lobe", "lock", "magnet", "main", "manifold", "mass", "material", "measure", "measurer", "memory", "mesh", "metal", "meter", "mirror", "mode", "motor", "node", "nutation", "oscillator", "pack", "particle", "pattern", "piston", "plane", "plasma", "pod", "polymer", "portal", "powerplant", "probe", "processor", "program", "projector", "quad", "qualifier", "radiation", "randomizer", "reaction", "reactor", "reader", "recalibration", "reciever", "recorder", "rectifier", "regulator", "resistor", "robot", "scanner", "scope", "section", "sequencer", "shaft", "sheeting", "simulator", "solid", "spectrum", "sphere", "square", "standard", "star", "stasis", "stimulator", "stream", "subroutine", "sweep", "synthesizer", "tank", "telemetry", "telescope", "thruster", "tractor", "translator", "transmitter", "transponder", "transporter", "unit", "utility", "vacuum", "ventilator", "vertex", "vial", "vibrator", "viewer", "visualizer", "wand", "warp", "weapon", "welder", "xperiment", "xanthocarp", "xanthochroia", "xanthocomic", "xanthocyanopsy", "xanthoderm", "xanthodont", "xanthometer", "xanthophyll", "yanker", "yolk", "y-chromosome", "yield", "zeugmatography", "zenophile", "zenographer", "zelophile", "zoodynamics", "zygodactyl", "zymurgy", "zwischenzug", "zoophytology"]
     }
-
+    $scope.letter = true;
     $scope.getFiltWrd = function(a, l) {
         var wrdOpts = a.filter(function(w) {
             return w[0] == l;
@@ -197,7 +201,8 @@ var app = angular.module('asurapp', ['ngSanitize']).controller('asurcon', functi
             law = String.fromCodePoint(65 + Math.floor(Math.random() * 25)) + '-' + Math.floor(Math.random() * 40),
             punishes = ['being fed to a starving bear', 'being thrown into an active volcano', 'having your lab coat revoked', 'not being invited to next year&rsquo;s Wintersday Party'],
             whichPunish = punishes[Math.floor(Math.random() * punishes.length)],
-            invention = $scope.makeAcro(acro);
+            invention = $scope.makeAcro(acro),
+            outAcro = $scope.inWrd ? $scope.inWrd.toUpperCase() : acro;
         console.log(acro)
         if (Math.random() > .66) {
             whichCol = 'Statics'
@@ -205,10 +210,11 @@ var app = angular.module('asurapp', ['ngSanitize']).controller('asurcon', functi
             whichCol = 'Synergetics'
         }
         var template = {
-            good: `<hr/>Dear ${sender},<br/>We at the college of ${whichCol} wish to extend our congratulations. Upon reviewing your proposal for a ${invention}, we found it well within Parameter ${law} as outlined by the Arcane Council. As such, we have deemed it appropriate to provide funding for your research. Please contact ${fund} at your earliest convenience to discuss funding for your project.<br/>${whichSal},<br/>${recip}`,
-            bad: `<hr/>Dear ${sender},<br/>Regrettably, the college of ${whichCol} is unable to provide funding for your ${invention}. Senior funds manager ${fund} has reviewed your proposal, and our team has unanimously decided that your project fails to meet guideline ${law} as outlined by the Arcane Council. Please note that resubmitting a rejected invention proposal may lead to fines of up to ${500+(100*Math.floor(Math.random()*15))} gold and ${whichPunish}. Thank you for your proposal, and we wish you luck in your future endeavors. <br/>${whichSal},<br/>${recip}`
+            good: `<hr/>Dear ${sender},<br/>We at the college of ${whichCol} wish to extend our congratulations. Upon reviewing your proposal for a ${invention} (${outAcro}), we found it well within Parameter ${law} as outlined by the Arcane Council. As such, we have deemed it appropriate to provide funding for your research. Please contact ${fund} at your earliest convenience to discuss funding for your project.<br/>${whichSal},<br/>${recip}`,
+            bad: `<hr/>Dear ${sender},<br/>Regrettably, the college of ${whichCol} is unable to provide funding for your ${invention} (${outAcro}). Senior funds manager ${fund} has reviewed your proposal, and our team has unanimously decided that your project fails to meet guideline ${law} as outlined by the Arcane Council. Please note that resubmitting a rejected invention proposal may lead to fines of up to ${500+(100*Math.floor(Math.random()*15))} gold and ${whichPunish}. Thank you for your proposal, and we wish you luck in your future endeavors. <br/>${whichSal},<br/>${recip}`
         }
         $scope.theLet = isGud ? template.good : template.bad;
-        console.log($scope.theLet)
+        console.log($scope.theLet);
+
     };
 });

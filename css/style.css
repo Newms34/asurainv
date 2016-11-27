@@ -127,7 +127,21 @@ body{
     background:#fed;
     padding:10px;
 }
-
+#bigbang{
+    border-radius:50%;
+    background-color: #a00;
+    color:#fff; 
+    width:20px;
+    height:20px;
+    display:inline-block;
+    font-weight:bold;
+    font-size:larger;
+    text-align:center;
+}
+.no-clik{
+    pointer-events: none;
+    cursor:default;
+}
 @keyframes spin {
     from {
         transform:rotateZ(0deg);
