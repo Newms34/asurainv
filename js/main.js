@@ -179,7 +179,7 @@ var app = angular.module('asurapp', ['ngSanitize']).controller('asurcon', functi
         return name;
     };
     $scope.genAcro = function() {
-        var len = Math.ceil(Math.random() * 8),
+        var len = 3 + Math.ceil(Math.random() * 5),
             wrd = '';
         for (var i = 0; i < len; i++) {
             wrd += String.fromCodePoint(65 + Math.floor(Math.random() * 25));
@@ -199,7 +199,7 @@ var app = angular.module('asurapp', ['ngSanitize']).controller('asurcon', functi
             sals = ['Sincerely', 'Yours', 'Regards', 'In science', 'Yours in the Alchemy'],
             whichSal = sals[Math.floor(Math.random() * sals.length)],
             law = String.fromCodePoint(65 + Math.floor(Math.random() * 25)) + '-' + Math.floor(Math.random() * 40),
-            punishes = ['being fed to a starving bear', 'being thrown into an active volcano', 'having your lab coat revoked', 'not being invited to next year&rsquo;s Wintersday Party'],
+            punishes = ['being fed to a starving bear', 'being thrown into an active volcano', 'having your lab coat revoked', 'not being invited to next year&rsquo;s Wintersday party','being the the subject of a progeny&rsquo;s first experiment.'],
             whichPunish = punishes[Math.floor(Math.random() * punishes.length)],
             invention = $scope.makeAcro(acro),
             outAcro = $scope.inWrd ? $scope.inWrd.toUpperCase() : acro;
@@ -210,7 +210,7 @@ var app = angular.module('asurapp', ['ngSanitize']).controller('asurcon', functi
             whichCol = 'Synergetics'
         }
         var template = {
-            good: `<hr/>Dear ${sender},<br/>We at the college of ${whichCol} wish to extend our congratulations. Upon reviewing your proposal for a ${invention} (${outAcro}), we found it well within Parameter ${law} as outlined by the Arcane Council. As such, we have deemed it appropriate to provide funding for your research. Please contact ${fund} at your earliest convenience to discuss funding for your project.<br/>${whichSal},<br/>${recip}`,
+            good: `<hr/>Dear ${sender},<br/>We at the college of ${whichCol} wish to extend our congratulations! Upon reviewing your proposal for a ${invention} (${outAcro}), we found it well within Parameter ${law} as outlined by the Arcane Council. As such, we have deemed it appropriate to provide funding for your research. Please contact ${fund} at your earliest convenience to discuss funding for your project.<br/>${whichSal},<br/>${recip}`,
             bad: `<hr/>Dear ${sender},<br/>Regrettably, the college of ${whichCol} is unable to provide funding for your ${invention} (${outAcro}). Senior funds manager ${fund} has reviewed your proposal, and our team has unanimously decided that your project fails to meet guideline ${law} as outlined by the Arcane Council. Please note that resubmitting a rejected invention proposal may lead to fines of up to ${500+(100*Math.floor(Math.random()*15))} gold and ${whichPunish}. Thank you for your proposal, and we wish you luck in your future endeavors. <br/>${whichSal},<br/>${recip}`
         }
         $scope.theLet = isGud ? template.good : template.bad;
